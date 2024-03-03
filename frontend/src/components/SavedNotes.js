@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 const SavedNotes = () => {
   const [groupedNotes, setGroupedNotes] = useState([]);
   //const host=`http://localhost:4000/`
-  const host=`https://notes-api-dm7y.onrender.com`
+  const host=`https://notes-api-dm7y.onrender.com/`
   useEffect(() => {
     const fetchNotes = async () => {
       try {
