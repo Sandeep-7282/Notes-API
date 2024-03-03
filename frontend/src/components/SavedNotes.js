@@ -3,11 +3,16 @@ import React, { useState, useEffect } from 'react';
 const SavedNotes = () => {
   // State to store grouped notes by date
   const [groupedNotes, setGroupedNotes] = useState([]);
+<<<<<<< HEAD
 
   // API host URL
   //const host = `http://localhost:4000`;
   const host = `https://notes-api-dm7y.onrender.com`;
 
+=======
+  //const host=`http://localhost:4000/`
+  const host=`https://notes-api-dm7y.onrender.com/`
+>>>>>>> d842439e6ee02c2668683da2030c0e4854850097
   useEffect(() => {
     // Function to fetch notes from the API
     const fetchNotes = async () => {

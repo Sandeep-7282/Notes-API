@@ -12,10 +12,15 @@ function App() {
     example: '',
     breakdown: '',
   });
+<<<<<<< HEAD
 
   // API host URL
     //const host=`http://localhost:4000`
     const host=`https://notes-api-dm7y.onrender.com`
+=======
+  //const host=`http://localhost:4000/`
+  const host=`https://notes-api-dm7y.onrender.com/`
+>>>>>>> d842439e6ee02c2668683da2030c0e4854850097
   // Function to handle changes in the input fields
   const handleInputChange = (e) => {
     const { name, value } = e.target;
