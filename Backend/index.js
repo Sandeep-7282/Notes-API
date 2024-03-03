@@ -3,7 +3,7 @@ const app = express();
 const port = 4000;
 const cors=require('cors')
 const notesapi=require('./routes/notes');
-// Define a route
+
 app.use(express.json());
 app.use(cors());
 app.get('/', (req, res) => {

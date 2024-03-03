@@ -3,8 +3,10 @@ const { addDoc, appCollection, getDocs } = require('../firebase');
 const { body, validationResult } = require('express-validator');
 const { getDoc, doc, serverTimestamp } = require('firebase/firestore/lite');
 
-exports.createnote = async (req, res) => {
+// Function to create a new note
+exports.createNote = async (req, res) => {
   try {
+    // Prepare data to be added to the database
     const jsonData = {
       ...req.body,
       timestamp: serverTimestamp(),
@@ -19,19 +21,20 @@ exports.createnote = async (req, res) => {
     // No validation errors, proceed to add data
     const docRef = await addDoc(appCollection, jsonData);
 
-
     // Respond with a success message or other appropriate response
     res.status(200).json({ success: true, message: 'Note created successfully', noteId: docRef.id });
   } catch (error) {
-   
     res.status(500).json({ success: false, message: 'Internal server error', error: error.message });
   }
 };
 
-exports.getnotes = async (req, res) => {
+// Function to get all notes
+exports.getNotes = async (req, res) => {
   try {
+    // Retrieve all documents from the collection
     const querySnapshot = await getDocs(appCollection);
 
+    // Check if there are no documents
     if (!querySnapshot || querySnapshot.empty) {
       res.status(200).json({ data: [] }); // Respond with an empty array or appropriate response
       return;
@@ -58,23 +61,29 @@ exports.getnotes = async (req, res) => {
   }
 };
 
-exports.getnotebyid = async (req, res) => {
+// Function to get a note by ID
+exports.getNoteById = async (req, res) => {
   try {
     const noteId = req.params.id; // Assuming the ID is provided in the request parameters
+
     // Construct a reference to the document using the provided ID
     const noteRef = doc(appCollection, noteId);
 
+    // Check if the provided ID is valid
     if (!noteRef) {
       res.status(401).json({ success: false, message: "Id is invalid" });
+      return;
     }
 
     // Retrieve the document
     const noteDoc = await getDoc(noteRef);
+
     // Check if the document exists
     if (!noteDoc.exists()) {
       res.status(404).json({ success: false, message: 'Note not found' });
       return;
     }
+
     // Respond with the document data and ID
     const noteData = {
       id: noteDoc.id,
@@ -82,7 +91,6 @@ exports.getnotebyid = async (req, res) => {
     };
     res.status(200).json({ success: true, data: noteData });
   } catch (err) {
-   
     res.status(500).json({ success: false, message: 'Internal server error', error: err.message });
   }
 };
