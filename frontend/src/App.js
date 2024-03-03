@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes,Route, Link } from 'react-router-dom';
 import SavedNotes from '../src/components/SavedNotes';
+
 function App() {
   // State object to store input values
   const [formData, setFormData] = useState({
@@ -11,7 +12,8 @@ function App() {
     example: '',
     breakdown: '',
   });
-
+  //const host=`http://localhost:4000/`
+  const host=`https://notes-api-dm7y.onrender.com`
   // Function to handle changes in the input fields
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,7 +35,7 @@ function App() {
         },
         body: JSON.stringify(formData),
       };
-      const response = await fetch('http://localhost:4000/api/notes/createnote', options);
+      const response = await fetch(`${host}api/notes/createnote`, options);
       if (response.ok) {
         alert(`success:Note created successfully!`);
         window.location.reload();

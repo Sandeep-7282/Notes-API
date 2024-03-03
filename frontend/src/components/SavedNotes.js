@@ -3,16 +3,15 @@ import React, { useState, useEffect } from 'react';
 
 const SavedNotes = () => {
   const [groupedNotes, setGroupedNotes] = useState([]);
-
+  //const host=`http://localhost:4000/`
+  const host=`https://notes-api-dm7y.onrender.com`
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const resp = await fetch('http://localhost:4000/api/notes/getnotes');
-
+        const resp = await fetch(`${host}api/notes/getnotes`);
         if (!resp.ok) {
           throw new Error('Network response was not ok');
         }
-
         const response = await resp.json();
         const sortedNotes = response.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
         setGroupedNotes(groupNotesByDate(sortedNotes));
@@ -20,7 +19,6 @@ const SavedNotes = () => {
         console.error('There was a problem with the fetch operation:', error);
       }
     };
-
     fetchNotes();
   }, []);
 
