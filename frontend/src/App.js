@@ -13,7 +13,7 @@ function App() {
     breakdown: '',
   });
   //const host=`http://localhost:4000/`
-  const host=`https://notes-api-dm7y.onrender.com`
+  const host=`https://notes-api-dm7y.onrender.com/`
   // Function to handle changes in the input fields
   const handleInputChange = (e) => {
     const { name, value } = e.target;
